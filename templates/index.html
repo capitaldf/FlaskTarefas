@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flask Tarefas</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Lista de Tarefas</h1>
+
+        <form action="{{ url_for('add') }}" method="POST">
+            <input
+                type="text"
+                name="task"
+                placeholder="Digite uma nova tarefa"
+                required
+            >
+
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <span>{{ task }}</span>
+
+                    <a href="{{ url_for('delete', task_id=loop.index0) }}">
+                        Excluir
+                    </a>
+                </li>
+            {% else %}
+                <li class="empty">
+                    Nenhuma tarefa cadastrada.
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</body>
+</html>
